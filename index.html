@@ -1,0 +1,141 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kavidu &amp; Sanji | Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-photo">
+        <img src="assets/photos/hero.jpg" alt="Kavidu &amp; Sanji" onerror="this.style.display='none'">
+        <span class="photo-placeholder">Add your hero photo as <b>assets/photos/hero.jpg</b></span>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="eyebrow">Together with their families</p>
+        <p class="script">We invite you to celebrate</p>
+        <h1>Kavidu <span>&amp;</span> Sanji</h1>
+        <p class="hero-sub">Our Wedding Day</p>
+        <div class="date-line">20 <i></i> 01 <i></i> 2027</div>
+        <p class="time">9:30 AM</p>
+        <button class="enter-btn" onclick="document.getElementById('welcome').scrollIntoView({behavior:'smooth'})">Open Invitation</button>
+      </div>
+    </section>
+
+    <!-- Welcome Section -->
+    <section class="section welcome" id="welcome">
+      <p class="eyebrow">A special invitation</p>
+      <h2>Dear <span id="guestName">Guest</span></h2>
+      <p class="guest-message">We would be delighted to have you with us as we begin this beautiful journey together.</p>
+      <div class="guest-card">
+        <span>Your table</span>
+        <strong id="tableNumber">Please contact us</strong>
+      </div>
+    </section>
+
+    <!-- Details Section -->
+    <section class="section details">
+      <p class="eyebrow">Save the date</p>
+      <h2>Our Wedding</h2>
+      <div class="detail-grid">
+        <article>
+          <b>20 January 2027</b>
+          <small>Date</small>
+        </article>
+        <article>
+          <b>9:30 AM</b>
+          <small>Time</small>
+        </article>
+        <article>
+          <b>Saffron Beach Hotel<br>Wadduwa</b>
+          <small>Venue</small>
+        </article>
+      </div>
+    </section>
+
+    <!-- Photo Story Section -->
+    <section class="photo-story">
+      <div class="wide-photo">
+        <img src="assets/photos/photo1.jpg" alt="" onerror="this.style.display='none'">
+      </div>
+      <div class="photo-caption">
+        <span>Our story</span>
+        <h2>A day to remember</h2>
+      </div>
+      <div class="photo-grid">
+        <div>
+          <img src="assets/photos/photo2.jpg" alt="" onerror="this.style.display='none'">
+        </div>
+        <div>
+          <img src="assets/photos/photo3.jpg" alt="" onerror="this.style.display='none'">
+        </div>
+      </div>
+      <div class="tall-photo">
+        <img src="assets/photos/photo4.jpg" alt="" onerror="this.style.display='none'">
+      </div>
+    </section>
+
+    <!-- Venue Section -->
+    <section class="section venue">
+      <p class="eyebrow">Join us</p>
+      <h2>Saffron Beach Hotel</h2>
+      <p>Sri Wickrama Road, Wadduwa, Sri Lanka</p>
+      <div class="map-card">
+        ⌖<span>Wadduwa, Sri Lanka</span>
+      </div>
+      <div class="button-row">
+        <a class="primary-btn" href="https://www.google.com/maps/search/?api=1&query=Saffron+Beach+Hotel+Wadduwa" target="_blank">Google Maps</a>
+        <a class="secondary-btn" href="https://www.google.com/maps/dir/?api=1&destination=Saffron+Beach+Hotel+Wadduwa" target="_blank">Get Directions</a>
+      </div>
+    </section>
+
+    <!-- Countdown & Calendar Section -->
+    <section class="section">
+      <p class="eyebrow">Counting the moments</p>
+      <h2>Until we say “I do”</h2>
+      <div class="countdown">
+        <div>
+          <strong id="days">00</strong>
+          <span>Days</span>
+        </div>
+        <div>
+          <strong id="hours">00</strong>
+          <span>Hours</span>
+        </div>
+        <div>
+          <strong id="minutes">00</strong>
+          <span>Minutes</span>
+        </div>
+        <div>
+          <strong id="seconds">00</strong>
+          <span>Seconds</span>
+        </div>
+      </div>
+      <a id="calendarBtn" class="primary-btn" target="_blank">Add to Google Calendar</a>
+    </section>
+
+    <!-- Closing Section -->
+    <section class="closing">
+      <div class="closing-photo">
+        <img src="assets/photos/closing.jpg" alt="" onerror="this.style.display='none'">
+      </div>
+      <div class="closing-content">
+        <p class="script">With love</p>
+        <h2>Kavidu <span>&amp;</span> Sanji</h2>
+        <p>20.01.2027 · 9:30 AM</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>Made with love for Kavidu &amp; Sanji</footer>
+
+  <script src="guests.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
