@@ -1,1 +1,159 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wedding Admin</title><link rel="stylesheet" href="styles.css"><style>.admin{max-width:850px;margin:auto;padding:50px 20px;text-align:center}.admin input{display:block;width:100%;max-width:500px;margin:10px auto;padding:13px;border:1px solid #ccc;border-radius:10px}.guest-row{display:grid;grid-template-columns:70px 1fr 100px 70px;gap:10px;padding:12px;border-bottom:1px solid #ddd;text-align:left}.warning{padding:15px;background:#fff3d8;border-radius:10px;font-size:13px}.admin .primary-btn,.admin .secondary-btn{border:0;margin:6px;cursor:pointer}.admin a{margin:6px}</style></head><body><main class="admin"><section id="login"><p class="eyebrow">Private area</p><h1>Wedding Admin</h1><p>Enter admin password</p><input id="pass" type="password" placeholder="Password"><button class="primary-btn" onclick="login()">Login</button><p id="msg"></p></section><section id="panel" hidden><p class="eyebrow">Kavidu & Sanji</p><h1>Guest Manager</h1><p class="warning">This static admin page saves changes in your browser and lets you download an updated guests.js. Upload that file to GitHub to publish the changes.</p><input id="gid" placeholder="Guest ID, e.g. 004"><input id="name" placeholder="Guest name"><input id="table" placeholder="Table number"><button class="primary-btn" onclick="saveGuest()">Add / Update Guest</button><div id="list"></div><br><button class="secondary-btn" onclick="download()">Download guests.js</button><button class="secondary-btn" onclick="location.href='index.html'">View invitation</button></section></main><script src="guests.js"></script><script>const PASSWORD="KaviSanji2027";let data=JSON.parse(localStorage.getItem("ksGuests")||"null")||GUESTS;function login(){if(document.getElementById("pass").value===PASSWORD){sessionStorage.ksAdmin="1";show()}else document.getElementById("msg").textContent="Incorrect password."}function show(){loginSection.hidden=true;panel.hidden=false;render()}const loginSection=document.getElementById("login"),panel=document.getElementById("panel");function saveGuest(){let id=gid.value.trim(),nameV=name.value.trim(),tableV=table.value.trim();if(!id||!nameV)return alert("Enter guest ID and name.");data[id]={name:nameV,table:tableV};localStorage.setItem("ksGuests",JSON.stringify(data));render()}function render(){list.innerHTML=Object.entries(data).sort().map(([id,g])=>`<div class="guest-row"><b>${id}</b><span>${g.name}</span><span>Table ${g.table||"—"}</span><button onclick="deleteGuest('${id}')">Delete</button></div>`).join("")}function deleteGuest(id){delete data[id];localStorage.setItem("ksGuests",JSON.stringify(data));render()}function download(){let s="const GUESTS = "+JSON.stringify(data,null,2)+";";let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([s],{type:"text/javascript"}));a.download="guests.js";a.click()}if(sessionStorage.ksAdmin==="1")show();</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wedding Admin</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .admin {
+      max-width: 850px;
+      margin: auto;
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .admin input {
+      display: block;
+      width: 100%;
+      max-width: 500px;
+      margin: 10px auto;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    .guest-row {
+      display: grid;
+      grid-template-columns: 70px 1fr 100px 70px;
+      gap: 10px;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    .warning {
+      padding: 15px;
+      background: #fff3d8;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+    .admin .primary-btn,
+    .admin .secondary-btn {
+      border: 0;
+      margin: 6px;
+      cursor: pointer;
+    }
+    .admin a {
+      margin: 6px;
+    }
+  </style>
+</head>
+<body>
+  <main class="admin">
+    <!-- Login Section -->
+    <section id="login">
+      <p class="eyebrow">Private area</p>
+      <h1>Wedding Admin</h1>
+      <p>Enter admin password</p>
+      <input id="pass" type="password" placeholder="Password">
+      <button class="primary-btn" onclick="login()">Login</button>
+      <p id="msg"></p>
+    </section>
+
+    <!-- Admin Panel Section -->
+    <section id="panel" hidden>
+      <p class="eyebrow">Kavidu &amp; Sanji</p>
+      <h1>Guest Manager</h1>
+      <p class="warning">
+        This static admin page saves changes in your browser and lets you download an updated guests.js. Upload that file to GitHub to publish the changes.
+      </p>
+
+      <input id="gid" placeholder="Guest ID, e.g. 004">
+      <input id="name" placeholder="Guest name">
+      <input id="table" placeholder="Table number">
+      <button class="primary-btn" onclick="saveGuest()">Add / Update Guest</button>
+
+      <div id="list"></div>
+      <br>
+
+      <button class="secondary-btn" onclick="download()">Download guests.js</button>
+      <button class="secondary-btn" onclick="location.href='index.html'">View invitation</button>
+    </section>
+  </main>
+
+  <script src="guests.js"></script>
+  <script>
+    const PASSWORD = "KaviSanji2027";
+    let data = JSON.parse(localStorage.getItem("ksGuests") || "null") || GUESTS;
+
+    const loginSection = document.getElementById("login");
+    const panel = document.getElementById("panel");
+
+    function login() {
+      if (document.getElementById("pass").value === PASSWORD) {
+        sessionStorage.ksAdmin = "1";
+        show();
+      } else {
+        document.getElementById("msg").textContent = "Incorrect password.";
+      }
+    }
+
+    function show() {
+      loginSection.hidden = true;
+      panel.hidden = false;
+      render();
+    }
+
+    function saveGuest() {
+      const idEl = document.getElementById("gid");
+      const nameEl = document.getElementById("name");
+      const tableEl = document.getElementById("table");
+
+      let id = idEl.value.trim();
+      let nameV = nameEl.value.trim();
+      let tableV = tableEl.value.trim();
+
+      if (!id || !nameV) {
+        return alert("Enter guest ID and name.");
+      }
+
+      data[id] = { name: nameV, table: tableV };
+      localStorage.setItem("ksGuests", JSON.stringify(data));
+
+      idEl.value = "";
+      nameEl.value = "";
+      tableEl.value = "";
+
+      render();
+    }
+
+    function render() {
+      const list = document.getElementById("list");
+      list.innerHTML = Object.entries(data)
+        .sort()
+        .map(([id, g]) => `
+          <div class="guest-row">
+            <b>${id}</b>
+            <span>${g.name}</span>
+            <span>Table ${g.table || "—"}</span>
+            <button onclick="deleteGuest('${id}')">Delete</button>
+          </div>
+        `).join("");
+    }
+
+    function deleteGuest(id) {
+      delete data[id];
+      localStorage.setItem("ksGuests", JSON.stringify(data));
+      render();
+    }
+
+    function download() {
+      let s = "const GUESTS = " + JSON.stringify(data, null, 2) + ";";
+      let a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([s], { type: "text/javascript" }));
+      a.download = "guests.js";
+      a.click();
+    }
+
+    if (sessionStorage.ksAdmin === "1") show();
+  </script>
+</body>
+</html>
