@@ -1,0 +1,1 @@
+const GUESTS={ "001":{name:"Dear Guest",table:"1"},"002":{name:"Mr. & Mrs. Perera",table:"2"},"003":{name:"Mr. Silva",table:"3"} };
